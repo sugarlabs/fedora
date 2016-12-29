@@ -38,6 +38,7 @@ Requires: openssh
 Requires: polkit
 Requires: python-telepathy
 Requires: sugar-artwork
+Requires: sugar-cp-all
 Requires: sugar-toolkit-gtk3
 Requires: telepathy-mission-control
 Requires: telepathy-gabble
