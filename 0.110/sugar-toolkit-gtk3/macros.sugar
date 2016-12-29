@@ -1,0 +1,2 @@
+%sugaractivitydir /usr/share/sugar/activities/
+%sugarlibdir %{_libdir}/sugar/activities/
