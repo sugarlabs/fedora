@@ -1,0 +1,29 @@
+--- sugar-0.107.1/bin/sugar.in.orig	2015-11-13 22:13:00.000000000 +0000
++++ sugar-0.107.1/bin/sugar.in	2016-01-04 02:38:48.945211100 +0000
+@@ -46,6 +46,26 @@
+ # Set Sugar's telepathy accounts directory
+ export MC_ACCOUNT_DIR="$HOME/.sugar/$SUGAR_PROFILE/accounts"
+ 
++# Check if the keyring exists and create a default
++# unencrypted keyring (OLPC #10290)
++keyring_path=$HOME/.gnome2/keyrings
++if [ ! -e $keyring_path/login.keyring ] &&
++    [ ! -e $keyring_path/default.keyring ]; then
++    mkdir -p $keyring_path
++    echo 'default' > $keyring_path/default
++    TIME=$(/bin/date +%s)
++    cat >> $keyring_path/default.keyring.tmp <<EOF
++[keyring]
++display-name=default
++ctime=$TIME
++mtime=$TIME
++lock-on-idle=false
++lock-timeout=0
++EOF
++
++mv $keyring_path/default.keyring{.tmp,}
++fi
++
+ # Source language settings and debug definitions
+ if [ -f ~/.i18n ]; then
+         . ~/.i18n
